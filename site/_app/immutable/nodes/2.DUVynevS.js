@@ -1,0 +1,1 @@
+import{a as r,f as p}from"../chunks/7Bk2yP7_.js";import"../chunks/U3c6Btyu.js";import{t as m,o as e}from"../chunks/Ci4kXfOn.js";import{s}from"../chunks/HUip0QQm.js";import{b as f}from"../chunks/CMiA1f3R.js";var i=p("<p><a>support kb</a></p>");function h(o){var a=i(),t=e(a);m(()=>s(t,"href",`${f??""}/kb`)),r(o,a)}export{h as component};

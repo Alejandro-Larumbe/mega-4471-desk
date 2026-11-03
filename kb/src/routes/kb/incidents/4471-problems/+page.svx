@@ -4,64 +4,67 @@ title: '#4471 · the problems it holds'
 owner: support desk
 status: living
 reviewed: 2026-11-03
-signature: v1.eyJzdWIiOiI2MzIzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM2NzQxNjEsImV4cCI6MTc5Mzc2MDU2MX0.fZdV3y2NEGU0hwcZatQh2qlLVSeanNYc_TaJQIyVfd8
+signature: v1.eyJzdWIiOiI2MzIzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM2NzQ1MjIsImV4cCI6MTc5Mzc2MDkyMn0.BQ5CGKv03I1-X3AGBwMT8CQvy1oOr4YWYNOawOjMgUI
 ---
 
 <script>
-  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import TicketTable from '#lib/kb/TicketTable.svelte';
   import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const tickets = {
+    parser:
+      'https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/4',
+    hint: 'https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/5',
+  };
 </script>
 
-Ticket #4471 was opened as one issue: the shared parser reads dates month first, and our
-tenants write the day first. It was marked **known** with one fix queued and one ticket for
-the whole queue.
+Ticket #4471 was opened as one issue: the shared parser reads dates month first, and our tenants
+write the day first. It was marked **known** with one fix queued and one ticket for the whole
+queue.
 
-The reports do not agree. Merged on subject line alone, they hold two problems, and the
-second one has no fix queued for it.
+The reports do not agree. Merged on subject line alone, they hold two problems, and the second
+one has no fix queued for it.
 
-## What the reports hold
+## What the merge still shows
 
-<ProblemTable ticket={4471} />
+<CauseTable ticket={4471} />
 
-<Callout kind="warn">
-The hint reports are in this ticket but not in its fix. The parser fix does not touch them:
-the form's printed hint is what is wrong there. They need a ticket of their own.
-</Callout>
+## The two problems, and where each one is tracked
 
-## The two problems
+<TicketTable ticket={4471} {tickets} />
 
 **parser** — the shared parser reads every date month first. A day-first tenant writes the day
-first, so the month and the day swap. This is the fault #4471 was opened for, and the one
-the queued fix addresses.
+first, so the month and the day swap. This is the fault #4471 was opened for, and the one the
+queued fix addresses.
 
-**hint** — through the booking-v3 form, the tenant types what the printed hint tells them,
-month first, and the form reads it the tenant's way. The dates still land on the wrong day,
-but no shared-parser change touches them: the form's hint is what is wrong here.
+**hint** — through the booking-v3 form, the tenant's people type what the printed hint tells
+them, month first, and the form reads it the tenant's way. The dates still land on the wrong
+day, but no shared-parser change touches them: the form's hint is what is wrong here.
 
-## Two counts that do not match
+<Callout kind="warn">
+The hint ones sit inside #4471 but outside its fix. The parser fix does not reach them, so they
+need a ticket of their own.
+</Callout>
 
-The desk's table and the reports disagree about two things. Both are in the export; only one
-of them is a count of the fault.
+## Two numbers in the export that do not survive the data
 
-- **427 rows, 412 reports.** The ticket system exports in overlapping pages, and one report
-  can come twice. One id, one report.
-- **`meta.intakeTag` is a guess.** It is what intake guessed from the reporter's browser, at
-  the moment the report came in. It disagrees with the cause the report is filed under here:
-  23 of the parser reports are tagged `hint`, and 15 of the hint reports are tagged `parser`.
-  The tenant, its booking form and the channel decide the cause; the tag does not.
+- **One id, one report.** The ticket system exports in overlapping pages, so the same report can
+  arrive twice. The counts above come from the reports themselves, one id each.
+- **`meta.intakeTag` is a guess.** It is what intake guessed from the reporter's browser at the
+  moment the report came in, and it disagrees with the cause a report is filed under here — the
+  "tagged as" column shows how far. The tenant, its booking form and the channel decide the
+  cause. The tag does not.
 
-So the counts above are counted from the reports themselves, one id each, by the cause the
-tenant's setup gives them.
+## The ones that read differently
 
-## The five reports that read differently
-
-Five of the parser reports do not read like month/day swaps. The desk caught them by hand and
-wrote them down in `desk-notes.json`: one day moves, and an invite arriving before the
-booking was made. They are counted under `parser`, where the tenant rule files them, and the
-note travels with the ticket — a month/day fix will not move a date that is one day out, so
-they need looking at on their own. The desk's own table footnotes them the same way.
+Five of the parser ones do not read like month/day swaps. The desk caught them by hand and
+wrote them down in `desk-notes.json`: a day moves, and an invite arrives before the booking was
+made. They stay counted under `parser`, where the tenant rule files them and where the desk's
+own table counts them, and the note travels with that ticket: a month/day fix will not move a
+date that is one day out, so they need looking at on their own.
 
 ## Since April
 
@@ -69,12 +72,12 @@ they need looking at on their own. The desk's own table footnotes them the same 
 
 ## What happens to #4471
 
-Split it. The parser reports stay on #4471 and keep its queued fix. The hint reports get a
-ticket of their own, and the queue stops being one number.
+Split it. The parser ones stay on #4471 and keep its queued fix. The hint ones get a ticket of
+their own, and the queue stops being one number.
 
 <Callout>
-The page that says "one issue, one fix queued" is not wrong about the parser. It is wrong
-about the ticket.
+The page that says "one issue, one fix queued" is not wrong about the parser. It is wrong about
+the ticket.
 </Callout>
 
 <RenderStamp {signature} />

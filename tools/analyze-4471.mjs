@@ -83,24 +83,25 @@ const oneDayMoveElsewhere = groups
 
 const oneDayMoveReports = merged.filter((r) => oneDayMoveIds.includes(r.id));
 
+// One ticket per problem, counted the way the desk counts: the one-day-move reports stay
+// counted under the cause they are filed in (the desk footnotes them there), so they are part
+// of the parser count and not a problem of their own.
 const problems = [
   {
     key: 'parser',
-    title: 'Dates flip month and day for day-first tenants (shared parser)',
-    count: parser ? parser.reports.length - oneDayMoveInParser : 0,
-    detail: 'The shared parser reads every date month first; a day-first tenant writes the day first, so the month and the day swap.',
+    title: 'The shared parser reads day-first dates month first',
+    count: parser ? parser.reports.length : 0,
+    detail:
+      'The shared parser reads every date month first; a day-first tenant writes the day first, so the month and the day swap.',
+    oneDayMoveInside: oneDayMoveInParser,
   },
   {
     key: 'hint',
-    title: 'booking-v3 form prints MM/DD/YYYY under a day-first tenant',
+    title: 'The booking-v3 form prints MM/DD/YYYY to day-first tenants',
     count: hint ? hint.reports.length : 0,
-    detail: 'Through the booking-v3 form, the tenant types what the printed hint tells them (month first) and the form reads it the tenant’s way. A different fix from the parser bug.',
-  },
-  {
-    key: 'one-day-move',
-    title: 'Dates land one day off (not a month/day swap)',
-    count: oneDayMoveReports.length,
-    detail: 'The desk read these as a one-day move (desk-notes.json), not as a month/day flip. A month/day swap never moves a date by one day, so these need their own fix.',
+    detail:
+      'Through the booking-v3 form, the tenant types what the printed hint tells them (month first) and the form reads it the tenant’s way. A different fix from the parser bug.',
+    oneDayMoveInside: 0,
   },
 ];
 
@@ -127,6 +128,7 @@ const result = {
     filedInParser: oneDayMoveInParser,
     elsewhere: oneDayMoveElsewhere,
     tenants: oneDayMoveReports.map((r) => r.tenant),
+    note: 'Counted under the cause they are filed in, footnoted there. Not a problem of its own.',
   },
   problems: problems.map((p) => ({ ...p, count: p.count })),
   totalCovered: problems.reduce((n, p) => n + p.count, 0),
