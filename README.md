@@ -8,6 +8,7 @@ problems they really hold, and the kb page that says so.
 | Path | What it is |
 | --- | --- |
 | `kb/src/routes/kb/incidents/4471-problems/+page.svx` | The new kb page: signed, with the counts computed at render time |
+| `kb/src/routes/kb/decisions/0002-4471-split/+page.svx` | The desk's decision record for the split, and how #4471 ended |
 | `kb/src/lib/kb/problems.ts` | Counts the problems the merged reports hold, the way the desk counts them |
 | `kb/src/lib/kb/TicketTable.svelte` | Renders that table, with the ticket filed for each problem |
 | `site/` | The kb built: the page as the desk sees it (`site/kb/incidents/4471-problems.html`) |
@@ -51,6 +52,18 @@ made. They stay counted under `parser`, where the tenant rule files them and whe
 own table counts them, and the note travels with that ticket — a month/day fix will not move a
 date that is one day out, so they need looking at on their own. That is why there is no third
 ticket: the desk files them under `parser` and counts them there.
+
+## How #4471 ended up
+
+The engineering update, 05 October:
+
+- **parser — fixed.** `fix(dates): parse dd/mm for eu locales`. The parser ticket closes as
+  completed on that evidence.
+- **hint — won't fix.** The booking-v3 form is retired. The hint ticket closes as not planned,
+  because the affected form was retired, not because the hint was fixed.
+
+Both tickets are closed, and the kb records the split and the closing in
+`kb/src/routes/kb/decisions/0002-4471-split/+page.svx`.
 
 ## Building the kb
 

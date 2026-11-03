@@ -1,0 +1,69 @@
+---
+layout: runbook
+title: '0002 · #4471 holds two problems, so it gets two tickets'
+owner: support desk
+status: accepted
+reviewed: 2026-11-03
+signature: v1.eyJzdWIiOiI2MzIzIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM2NzQ1MjIsImV4cCI6MTc5Mzc2MDkyMn0.BQ5CGKv03I1-X3AGBwMT8CQvy1oOr4YWYNOawOjMgUI
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+**Date:** 3 November 2026 · **Deciders:** support desk
+
+## Context
+
+The desk merged 412 reports about dates into one ticket, #4471, and marked it known: one issue,
+one fix queued, the parser reading dates month first while every tenant on file writes the day
+first. The merge was made on subject line alone
+([decision 0001](/kb/decisions/0001-dedupe-by-subject)), so a second defect rode in with the
+first one and sat there counted under the same number.
+
+Read by cause instead of by subject, the pile holds two problems, and the desk's own cause table
+already says so: it marks the `hint` group "not this ticket — no ticket of its own".
+
+## Decision
+
+One ticket per problem, counted the way the desk counts:
+
+| problem | reports | ticket | outcome |
+| --- | ---: | --- | --- |
+| `parser` | 379 | [#4](https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/4) | closed as completed |
+| `hint` | 33 | [#5](https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/5) | closed as not planned |
+
+The `parser` reports stay on #4471 and keep its queued fix. The `hint` reports get a ticket of
+their own, because the form's printed hint is what is wrong there and no shared-parser change
+reaches it.
+
+The five reports the desk read as one-day moves stay counted under `parser`, where the tenant
+rule files them and where the desk's own table counts them. They are footnoted on that ticket,
+not split off: a month/day fix will not move a date that is one day out, so they need looking at
+on their own.
+
+## Engineering update
+
+#4471 was closed on 05 October:
+
+- **parser — fixed.** `fix(dates): parse dd/mm for eu locales`.
+- **hint — won't fix.** The booking-v3 form is retired.
+
+The parser ticket closes as completed on that evidence. The hint ticket closes as not planned,
+because the affected form was retired, not because the hint was fixed.
+
+## Consequences
+
+- The queue stops being one number. 379 + 33 = 412.
+- Count by cause, from the reports themselves, one id each. The export pages overlap, and
+  `meta.intakeTag` is a guess about the reporter's browser, not the cause.
+- The signed page for the split is [the desk's own page for these two problems](/kb/incidents/4471-problems).
+
+<Callout>
+The count a problem is given comes from the cause rule, never from how the reports were tagged
+or from how many rows the export shipped.
+</Callout>
+
+<RenderStamp {signature} />

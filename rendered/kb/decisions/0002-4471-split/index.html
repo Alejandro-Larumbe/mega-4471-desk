@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_app/immutable/entry/start.ChmHDPqs.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CsBkpOKm.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/B4HIQuKu.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DF-Guwgy.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.BqkTBN5O.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Dp1pzeXC.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DeTb_u2C.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/C0VIarWX.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Bz2jS1kN.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/nwqWTBFg.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/ChtMXoRo.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/0.DuMIkyYJ.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BVC62ws_.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DS8MeBWo.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/5.DgzFFW5W.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/GA0qJTbD.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/ByypMVZS.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Du9QHA6w.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CjJl4H08.js" rel="modulepreload">
+		<!--e2jw2j--><!----><title>0002 · #4471 holds two problems, so it gets two tickets · support kb</title>
+		<link href="../../_app/immutable/assets/0.BhhgOc_n.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/Callout.yLErXQDM.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/RenderStamp.CMZ6TBbc.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/CauseTable.DuKfINX_.css" rel="stylesheet">
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents"><!--[--><!--[0--><!--[--><!--[0--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">0002 · #4471 holds two problems, so it gets two tickets</h1> <p class="meta svelte-e2jw2j"><span>owner <b>support desk</b></span> <span class="status accepted svelte-e2jw2j">accepted</span> <span class="svelte-e2jw2j">reviewed 2026-11-03 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><!--[--><p><strong>Date:</strong> 3 November 2026 · <strong>Deciders:</strong> support desk</p> <h2>Context</h2> <p>The desk merged 412 reports about dates into one ticket, #4471, and marked it known: one issue,
+one fix queued, the parser reading dates month first while every tenant on file writes the day
+first. The merge was made on subject line alone
+(<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>), so a second defect rode in with the
+first one and sat there counted under the same number.</p> <p>Read by cause instead of by subject, the pile holds two problems, and the desk’s own cause table
+already says so: it marks the <code>hint</code> group “not this ticket — no ticket of its own”.</p> <h2>Decision</h2> <p>One ticket per problem, counted the way the desk counts:</p> <table><thead><tr><th>problem</th><th align="right">reports</th><th>ticket</th><th>outcome</th></tr></thead><tbody><tr><td><code>parser</code></td><td align="right">379</td><td><a href="https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/4" rel="nofollow">#4</a></td><td>closed as completed</td></tr><tr><td><code>hint</code></td><td align="right">33</td><td><a href="https://github.com/Alejandro-Larumbe/mega-4471-desk/issues/5" rel="nofollow">#5</a></td><td>closed as not planned</td></tr></tbody></table> <p>The <code>parser</code> reports stay on #4471 and keep its queued fix. The <code>hint</code> reports get a ticket of
+their own, because the form’s printed hint is what is wrong there and no shared-parser change
+reaches it.</p> <p>The five reports the desk read as one-day moves stay counted under <code>parser</code>, where the tenant
+rule files them and where the desk’s own table counts them. They are footnoted on that ticket,
+not split off: a month/day fix will not move a date that is one day out, so they need looking at
+on their own.</p> <h2>Engineering update</h2> <p>#4471 was closed on 05 October:</p> <ul><li><strong>parser — fixed.</strong> <code>fix(dates): parse dd/mm for eu locales</code>.</li> <li><strong>hint — won’t fix.</strong> The booking-v3 form is retired.</li></ul> <p>The parser ticket closes as completed on that evidence. The hint ticket closes as not planned,
+because the affected form was retired, not because the hint was fixed.</p> <h2>Consequences</h2> <ul><li>The queue stops being one number. 379 + 33 = 412.</li> <li>Count by cause, from the reports themselves, one id each. The export pages overlap, and <code>meta.intakeTag</code> is a guess about the reporter’s browser, not the cause.</li> <li>The signed page for the split is <a href="/kb/incidents/4471-problems">the desk’s own page for these two problems</a>.</li></ul> <aside class="note svelte-17bri61"><!---->The count a problem is given comes from the cause rule, never from how the reports were tagged
+or from how many rows the export shipped.<!----></aside><!----> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-NXMQ-X7WB</b></p><!--]--><!----><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1t8t9lj = {
+						base: new URL("../..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.ChmHDPqs.js"),
+						import("../../_app/immutable/entry/app.BqkTBN5O.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

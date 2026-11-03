@@ -70,14 +70,19 @@ date that is one day out, so they need looking at on their own.
 
 <QueueTimeline ticket={4471} />
 
-## What happens to #4471
+## Where #4471 ended up
 
-Split it. The parser ones stay on #4471 and keep its queued fix. The hint ones get a ticket of
-their own, and the queue stops being one number.
+The engineering update, 05 October:
+
+- **parser — fixed.** `fix(dates): parse dd/mm for eu locales`.
+- **hint — won't fix.** The booking-v3 form is retired.
+
+#4471 is closed. The parser ticket closes as completed on that evidence. The hint ticket closes
+as not planned, because the affected form was retired, not because the hint was fixed.
 
 <Callout>
-The page that says "one issue, one fix queued" is not wrong about the parser. It is wrong about
-the ticket.
+The counts on this page are the 4 October export. They say what the desk saw while the queue was
+open, not what the fixes cover afterwards.
 </Callout>
 
 <RenderStamp {signature} />
