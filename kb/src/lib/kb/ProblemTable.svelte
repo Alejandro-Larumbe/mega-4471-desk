@@ -9,7 +9,7 @@
 
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === ticket));
 
-  // The problems the ticket really holds, each with the reports it covers.
+  // The problems the ticket holds, counted the way the desk counts them.
   const problems = $derived(problemsFor(merged, tenantOf, notes.oneDayMove));
 
   const tags = (g: { taggedAs: Record<string, number> }) =>
@@ -42,11 +42,11 @@
   </tbody>
 </table>
 
-{#each problems.filter((p) => p.filedUnder !== p.cause) as p (p.cause)}
+{#each problems.filter((p) => p.readDifferently > 0) as p (p.cause)}
   <p class="note">
-    {p.reports.length} reports read as a one-day move. The tenant rule filed them under
-    <code>{p.filedUnder}</code>, so the desk's table counts them in the wrong row. A one-day
-    move is not a month/day swap: one fix does not cover both.
+    {p.readDifferently} of these read differently from the cause they are filed under: the desk
+    noted them as one-day moves, not month/day swaps. They stay counted under
+    <code>{p.cause}</code>, where the desk files them, and the note travels with the ticket.
   </p>
 {/each}
 
